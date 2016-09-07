@@ -2,7 +2,7 @@
 title:       Pratyush Kumar
 email:       pratyush.019@gmail.com
 author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+description: "Data Science blogs."
 baseurl:     ""
 url:         "pratyushkumar.me"
 date_format: "%b %-d, %Y"
@@ -50,7 +50,7 @@ skype_username:
 steam_nickname:
 google_plus_id: +PratyushKumariitr
 linkedin_username: pratyush19
-angellist_username:
+angellist_username: pratyush-kumar-6
 medium_id:
 bitcoin_url:
 paypal_url:
