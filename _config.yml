@@ -37,8 +37,8 @@ disqus_shortname:
 
 # Facebook Comments plugin
 # (leave blank to disable Facebook Comments, otherwise set it to true)
-facebook_comments:
-facebook_appid:
+facebook_comments: true
+facebook_appid: https://www.facebook.com/pratyush.kumar.19
 facebook_comments_number: 10
 
 # Social icons
@@ -48,7 +48,7 @@ stackoverflow_id:
 twitter_username: pratyushiit
 skype_username:
 steam_nickname:
-google_plus_id: PratyushKumariitr
+google_plus_id: +PratyushKumariitr
 linkedin_username: pratyush19
 angellist_username:
 medium_id:
@@ -99,7 +99,7 @@ text:
       sending:  'sending..'
       sent:     'Message sent!'
       error:    'Error!'
-  thanks: 'Thanks for contacting us. We will reply as soon as possible.'
+  thanks: 'Thanks for contacting me. I will reply as soon as possible.'
   og_locale: 'en_US'
 
 # Build settings
