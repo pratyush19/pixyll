@@ -21,10 +21,10 @@ animated:             true
 show_related_posts:   false
 show_post_footers:    false
 show_social_icons:    true
-ajaxify_contact_form: false
+ajaxify_contact_form: true
 enable_mathjax: false
 extended_fonts: false
-enable_anchorjs: false
+enable_anchorjs: true
 
 # Facebook Page integration
 # (for instant articles and other stuff)
@@ -57,12 +57,12 @@ paypal_url:
 flattr_button:
 
 # Post sharing icons
-show_sharing_icons: false
+show_sharing_icons: true
 # Change to 'true' to enable individual icons
-share_facebook: false
+share_facebook: true
 share_twitter: false
 share_googleplus: false
-share_linkedin: false
+share_linkedin: true
 share_digg: false
 share_tumblr: false
 share_reddit: false
