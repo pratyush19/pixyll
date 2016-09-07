@@ -8,10 +8,10 @@ url:         "pratyushkumar.me"
 date_format: "%b %-d, %Y"
 
 # Google services
-google_verification:
+google_verification: DCBYTknO-MtUBIw0oCAg4XmkRuZhEqtfDs36t7U0Snw
 # Use either direct GA implementation or set up GTM account
 # - using both will skew your data (leave blank to not use at all)
-google_analytics:
+google_analytics: UA-83847101-1
 google_tag_manager:
 # Bing services
 bing_verification:
@@ -22,8 +22,8 @@ show_related_posts:   false
 show_post_footers:    false
 show_social_icons:    true
 ajaxify_contact_form: true
-enable_mathjax: false
-extended_fonts: false
+enable_mathjax: true
+extended_fonts: true
 enable_anchorjs: true
 
 # Facebook Page integration
