@@ -42,19 +42,20 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-github_username: pratyush19
-bitbucket_username:
-stackoverflow_id:
-twitter_username: pratyushiit
-skype_username:
-steam_nickname:
-google_plus_id: PratyushKumariitr
-linkedin_username: pratyush19
-angellist_username:
-medium_id:
-bitcoin_url:
-paypal_url:
-flattr_button:
+footer-links:
+  dribbble:
+  email:
+  facebook: pratyush.kumar.19
+  flickr:
+  github: pratyush19
+  instagram:
+  linkedin: pratyush19
+  pinterest:
+  rss: # just type anything here for a working RSS icon
+  twitter: jekyllrb
+  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
+  youtube: # channel/<your_long_string> or user/<user-name>
+  googleplus: # anything in your profile username that comes after plus.google.com/
 
 # Post sharing icons
 show_sharing_icons: false
