@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      My First Blog
-date:       2016-07-09
+date:       2016-09-07
 summary:    Hi All!
-categories: blog
+categories: post
 ---
 
 Hava a fantastic day!!
