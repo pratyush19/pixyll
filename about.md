@@ -4,9 +4,9 @@ title: About me
 permalink: /about/
 tags: about
 ---
-
-<img align="center" src="images/me.png" alt="Drawing" width="200" height = "200" />
-
+<p  align="center">
+<img src="images/me.png" width="200" height = "200" />
+</p>
 <br />
 Hi there! I'm a final year undergraduate student at Indian Institute of Technology Roorkee, India. 
 <br />
