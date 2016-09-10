@@ -6,7 +6,7 @@ tags: about
 ---
 
 <p align="center">
-<img src="images/pratyush_me.png" alt="Drawing" width="200"/>
+<img src="images/pratyush.png" alt="Drawing" width="200"/>
 </p>
 <br />
 Hi there! I'm a final year undergraduate student at Indian Institute of Technology Roorkee, India. 
