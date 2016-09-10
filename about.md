@@ -5,9 +5,8 @@ permalink: /about/
 tags: about
 ---
 
-<p align="center">
-<img src="images/pratyush.png" alt="Drawing" width="200"/>
-</p>
+<img align="center" src="images/me.png" alt="Drawing" width="200" height = "200" />
+
 <br />
 Hi there! I'm a final year undergraduate student at Indian Institute of Technology Roorkee, India. 
 <br />
