@@ -33,11 +33,11 @@ fb_page_id:
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname:
+disqus_shortname: pratyushkumar
 
 # Facebook Comments plugin
 # (leave blank to disable Facebook Comments, otherwise set it to true)
-facebook_comments: true
+facebook_comments: false
 facebook_appid: https://www.facebook.com/pratyush.kumar.19
 facebook_comments_number: 10
 
