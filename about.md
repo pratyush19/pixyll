@@ -8,11 +8,13 @@ tags: about
 <img src="/images/me.png" width="200" height = "200" />
 </p>
 <br />
-Hi there! I'm a final year undergraduate student at Indian Institute of Technology Roorkee, India. 
+Hi! I'm Pratyush, a final year undergraduate student at Indian Institute of Technology Roorkee, India. 
 <br />
-I'm data science enthusiastic who is always curious about uncovering the patterns in the data and make the data more valuable for the world and work. I'm passionate about improving and implementing machine learning and see the impact on our knowledge and lives.
+I'm data science enthusiasts with the big interest to discover patterns in the data to make it more valuable for the world and work. I'm working on improving and implementing machine learning in the real world data and see the impact on our knowledge and lives. 
 <br />
-I have a great interest to make Smart Devices for our daily life with the help of machine learning and world research.
+I love to solve complex problems whose results have a big impact on our lives. In my free time, I do new stuff, play computer games and solve competitive programming. I am curious about making smart devices for all daily lives.
+<br/>
+I believe everyday there are lots of new things we can learn to be, even a bit, better than the person we were yesterday.
 <br />
 <br />
 You can find my Résumé [here](/Resume.pdf).
