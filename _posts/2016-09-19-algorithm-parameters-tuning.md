@@ -17,7 +17,9 @@ There are two big univariate feature selection tools in sklearn: ```SelectPercen
 * Regression: [f_regression](http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression)
 
 ### SelectPercentile
+
 Select top 10 percentile features for the classification data
+
 ```python
 from sklearn.feature_selection import SelectPercentile, f_classif
 x_best = SelectPercentile(f_classif, percentile=10)  
@@ -25,7 +27,9 @@ x_best.fit_transform(features, labels)
 ```
 
 ### SelectKBest
+
 Select k best features for the classification data
+
 ```python
 from sklearn.feature_selection import SelectKBest, f_classif
 k_best = SelectkBest(f_classif, percentile=10)  
