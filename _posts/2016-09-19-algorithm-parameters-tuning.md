@@ -59,10 +59,11 @@ k_best.fit_transform(features, labels)
 ```
 
 After selecting the k or x best features, we now implement **dimensionality reduction**  used to reduce the dimensions of the features. I'm not going into detail of [PCA](http://scikit-learn.org/stable/modules/decomposition.html#pca) but just giving a brief introduction and its implementation using sklearn.
+
 ## Principal Component Analysis (PCA)
 PCA is a systematized way to transform input features into principal components (PCs) or new features. PCs are directions in data that maximizes variance or minimizes information loss when you perform projection or compression down onto those PCs. Here information loss is the distance between old data point to its new transformed value and variance means variability or uniqueness of the dataset.
 
-* ```n_components``` (int): number of components to keep with default value is ```min(n_samples, n_features)```
+* ```n_components``` (int): number of components to keep with default value is min(n_samples, n_features)
 * ```whiten``` (bool): transform data to unit variance and zero mean
 * ```random_state``` (int): pseudo random number generator seed control
 
@@ -71,13 +72,15 @@ from sklearn.decomposition import PCA
 pca = PCA(n_components=3, whiten=TRUE, random_state=42) #transform features to 3 new features
 pca.fit(features)
 ```
+
 Other PCA:
+
 * [RandomizedPCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA)
 * [IncrementalPCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA)
 * [KernelPCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA)
 
 ## Validation
-Training and testing on the same dataset would fail to predict anything useful on yet-unseen data, this is a common problem called [overfitting](https://en.wikipedia.org/wiki/Overfitting). To avoid overfitting, it is common practice in machine learning experiment to hold out part of the available data as a **test set** ```features_test, labels_test```.<br/>
+Training and testing on the same dataset would fail to predict anything useful on yet-unseen data, this is a common problem called [overfitting](https://en.wikipedia.org/wiki/Overfitting). To avoid overfitting, it is common practice in machine learning experiment to hold out part of the available data as a test set (features_test, labels_test).<br/>
 In sklearn, a random split into training and test set cab be done using [train_test_split](http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html#sklearn.cross_validation.train_test_split).
 
 ```python
@@ -108,10 +111,31 @@ for train_index, test_index in kf:
 
 ## Parameters Tuning
 Parameters tuning is the final step in the process of applied machine learning. It is also [Hyperparameter optimization](https://en.wikipedia.org/wiki/Hyperparameter_optimization) where the algorithm parameters are referred to as hyperparameters. In this process, we choose diffferent values of the hyperparameters with the goal of optimize the algorithm's performance. It is really important to first understand the available parameters and their roles in the performance of the algorithm's before performing any parameters tuning.<br/>
-Sklearn provides two different methods for parameters tuning, [GridSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV) and [RandomizedSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.RandomizedSearchCV.html#sklearn.grid_search.RandomizedSearchCV). I discuss GridSearchCv as it is currently the most widely used method for parameter optimization.
+Sklearn provides two different methods for parameters tuning, [GridSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV) and [RandomizedSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.RandomizedSearchCV.html#sklearn.grid_search.RandomizedSearchCV). I discuss GridSearchCv as it is the most widely used method for parameter optimization.
 
 #### GridSearchCV
 GridSearchCV is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. It exhaustively generates candidates from a grid of parameter values specified with the ```param_grid``` parameter. The beauty is that it can work through many combinations in only a couple extra lines of code.<br/>
-Let's do the parameters tuning for [decision tree]()
+Let's do the parameters tuning for [decision tree](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier)
+
+```python
+from sklearn.grid_search import GridSearchCV
+from sklearn.tree import DecisionTreeClassifier
+
+#dictionary of the parameters, and the possible values they may take
+#you can more values and parameters (more computation time)
+parameters = {'max_depth':[None, 5, 10], 
+              'min_samples_split':[2, 4, 6, 8, 10],
+              'min_samples_leaf': [2, 4, 6, 8, 10],
+              'criterion': ["entropy", "gini"],
+              'random_state': [42, 46, 60]}
+#decision tree algorithm for classification
+dt = DecisionTreeClassifier()  
+#pass the algorithm and the dictionary of parameters to generate a grid of parameter combinations to try
+clf = GridSearchCV(dt, parameters) 
+#fit function tries all the parameter combinations, and returns an optimal parameters value
+clf.fit(features, labels)
+#dictionary of optimal parameters value 
+clf.best_params_.
+```
 
 
