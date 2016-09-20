@@ -4,7 +4,7 @@ email:       pratyush.019@gmail.com
 author:      John Otander
 description: "Data Science blogs."
 baseurl:     ""
-url:         "http://pratyushkumar.me"
+url:         "https://pratyushkumar.me"
 date_format: "%b %-d, %Y"
 
 # Google services
