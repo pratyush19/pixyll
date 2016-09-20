@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Algorithm Parameteres Tuning 
+title:      Algorithm Parameters Tuning 
 date:       2016-09-19
 summary:    Machine learning, Parameters tuning, Features engineering, Evaluation metrices, Data visualization
 categories: blog
@@ -18,6 +18,7 @@ from sklearn.preprocessing import StandardScaler()
 scaler = StandardScaler()
 rescaled_features = scaler.fit_transform(features)
 ```
+
 #### MinMax Scaling
 The min-max rescaler (or normalization) transform the features to have range [0, 1]. A min-max scaling is done using the following equation: (X - X.min)/(X.max - X.min)
 
@@ -64,6 +65,7 @@ PCA is a systematized way to transform input features into principal components 
 * ```n_components``` (int): number of components to keep with default value is ```min(n_samples, n_features)```
 * ```whiten``` (bool): transform data to unit variance and zero mean
 * ```random_state``` (int): pseudo random number generator seed control
+
 ```python
 from sklearn.decomposition import PCA
 pca = PCA(n_components=3, whiten=TRUE, random_state=42) #transform features to 3 new features
@@ -105,3 +107,11 @@ for train_index, test_index in kf:
 ```
 
 ## Parameters Tuning
+Parameters tuning is the final step in the process of applied machine learning. It is also [Hyperparameter optimization](https://en.wikipedia.org/wiki/Hyperparameter_optimization) where the algorithm parameters are referred to as hyperparameters. In this process, we choose diffferent values of the hyperparameters with the goal of optimize the algorithm's performance. It is really important to first understand the available parameters and their roles in the performance of the algorithm's before performing any parameters tuning.<br/>
+Sklearn provides two different methods for parameters tuning, [GridSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV) and [RandomizedSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.RandomizedSearchCV.html#sklearn.grid_search.RandomizedSearchCV). I discuss GridSearchCv as it is currently the most widely used method for parameter optimization.
+
+#### GridSearchCV
+GridSearchCV is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. It exhaustively generates candidates from a grid of parameter values specified with the ```param_grid``` parameter. The beauty is that it can work through many combinations in only a couple extra lines of code.<br/>
+Let's do the parameters tuning for [decision tree]()
+
+
