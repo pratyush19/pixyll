@@ -5,13 +5,13 @@ date:       2016-09-19
 summary:    Machine learning, Parameters tuning, Features engineering, Evaluation metrices, Data visualization
 categories: blog
 ---
-In this blog, I will cover how to find best parameters for a Machine Learning algorithm using Sklearn.
+In this post, I will detail cover how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
 
 ## Feature Scaling
-Feature scaling is an important step in pre-processing the features for some types of machine learning algorithms. 
+Feature scaling is a major step in pre-processing the features for some types of machine learning algorithms. Some algorithms like Support Vector Machine, K-means calculate the distance between points, in that case, feature scaling becomes significantly important. If one of the features has a broad range of values, the distance will be dominated by this particular feature. Therefore, the range of all features should be normalized so that each feature contributes approximately proportionately to the final distance. 
 
 #### Standardization
-It is used to rescaled the features to behave like standard normal distribution with mean equal to 0 and standard deviation equal to 1. The standard scores of the samples are calculated using z = (X - mean)/s.d. The features are now centered around o with a standard deviation of 1.
+Feature standardization or, Z-score normalization rescaled the values of each feature to behave like standard normal distribution with mean equal to 0 and standard deviation equal to 1. The Z-score normalization is calculated by [standard scores](https://en.wikipedia.org/wiki/Standard_score) using equation: z = (X-mean)/s.d.. It transforms the data to center it by removing the mean value of each feature, then scale it by dividing by their standard deviation. Below is its implementation in scikit-learn.
 
 ```python
 from sklearn.preprocessing import StandardScaler()
@@ -20,7 +20,9 @@ rescaled_features = scaler.fit_transform(features)
 ```
 
 #### MinMax Scaling
-The min-max rescaler (or normalization) transform the features to have range [0, 1]. A min-max scaling is done using the following equation: (X - X.min)/(X.max - X.min)
+Min-max scaling (or, normalization) transforms each feature to a range [0, 1]. The general formula to transform each feature given by (X-X.min)/(X.max-X.min). 
+
+The use of standardization or normalization depends on the application you choose. For most applications, standardization is preferred.
 
 ```python
 from sklearn.preprocessing import MinMaxScaler()
@@ -30,21 +32,18 @@ rescaled_features = scaler.fit_transform(features)
 
 ## Features Selection
 
-*make everything as simple as possible, but no simpler* -- Albert Einstein<br/>
-The minimal number of features a machine learning algorithm takes to really capture the trends and patterns in the data.
-There are several go-to methods of automatically selecting features in sklearn. Many of them fall under the umbrella of univariate feature selection, which treats each feature independently and asks how much power it gives you in classifying or regressing.<br/>
+The minimal number of features a machine learning algorithm takes to capture the trends and patterns in the data. There are several go-to methods of automatically selecting features in sklearn. Many of them fall under the umbrella of univariate feature selection, which treats each feature independently and asks how much power it gives you in classifying or regressing.<br/>
 There are two big univariate feature selection tools in sklearn: ```SelectPercentile``` and ```SelectKBest```. The difference is pretty apparent by the names: SelectPercentile selects the X% of features that are most powerful (where X is a parameter) and SelectKBest selects the K features that are most powerful (where K is a parameter).
 
-* Classification: [f_classif](http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif), [chi2](http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2)
-* Regression: [f_regression](http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression)
+Read more about various parameters used in feature selection from sklearn [documentation](http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection).
 
 #### SelectPercentile
 
-Select top 10 percentile features for the classification data
+Select top x percentile features for the classification data
 
 ```python
 from sklearn.feature_selection import SelectPercentile, f_classif
-x_best = SelectPercentile(f_classif, percentile=10)  
+x_best = SelectPercentile(f_classif, percentile=x)  
 x_best.fit_transform(features, labels)
 ```
 
@@ -57,11 +56,13 @@ from sklearn.feature_selection import SelectKBest, f_classif
 k_best = SelectkBest(f_classif, k=k)  
 k_best.fit_transform(features, labels)
 ```
-
-After selecting the k or x best features, we now implement **dimensionality reduction**  used to reduce the dimensions of the features. I'm not going into detail of [PCA](http://scikit-learn.org/stable/modules/decomposition.html#pca) but just giving a brief introduction and its implementation using sklearn.
+ 
 
 ## Principal Component Analysis (PCA)
+We now implement **dimensionality reduction** (or, [PCA](http://scikit-learn.org/stable/modules/decomposition.html#pca)  used to reduce the dimensions of the features. I'm not going into detail of PCA but just giving a brief introduction and its implementation using sklearn.
 PCA is a systematized way to transform input features into principal components (PCs) or new features. PCs are directions in data that maximizes variance or minimizes information loss when you perform projection or compression down onto those PCs. Here information loss is the distance between old data point to its new transformed value and variance means variability or uniqueness of the dataset.
+
+So, PCA is different from feature selection is that in PCA combines similar (correlated) features and creates new ones while feature selection doesn't combine features, it just evaluates their quality, predictive power and selects the best set.  
 
 * ```n_components``` (int): number of components to keep with default value is min(n_samples, n_features)
 * ```whiten``` (bool): transform data to unit variance and zero mean
