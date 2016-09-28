@@ -139,10 +139,10 @@ clf.fit(features, labels)
 clf.best_params_.
 ```
 
-I should try all the combinations of parameters, and not just vary them independently. In the above code, I  tried 3 different values of *max_depth*,  5 different values of each *min_samples_split* and *min_samples_leaf*, and 2 different values of *criterion*, that means 3 x 5 x 5 x 2 = 150 different combinations. GridSearchCV allows me to construct a grid of all the combinations of parameters, tries each combination, and then reports back the best combination.
+We should try all the combinations of parameters, and not just vary them independently. In the above code, I  tried 3 different values of *max_depth*,  5 different values of each *min_samples_split* and *min_samples_leaf*, and 2 different values of *criterion*, that means 3 x 5 x 5 x 2 = 150 different combinations. *GridSearchCV* allows me to construct a grid of all the combinations of parameters, tries each combination, and then reports back the best combination.
  
  
-Great, you have implemented parameters tuning for the decision tree with only a few extra lines of code. You can similarly tune parameters for any machine learning algorithm. But, there is one thing is that we have only used one estimator in the above code, i.e., the classifier in the parameters tuning. What if we want to use multiple estimators like *StandardScaler*, *SelectKBest*, *PCA* and grid search over parameters of all the estimators, the answer is *pipeline* followed by *grid search*.
+Great, you have implemented parameters tuning for the decision tree with only a few extra lines of code. You can similarly tune parameters for any machine learning algorithm. But, there is one thing is that we have only used one estimator in the above code, i.e., the classifier in the parameters tuning. What if we want to use multiple estimators like *StandardScaler*, *SelectKBest*, *PCA* and grid search over parameters of all the estimators, the answer is *Pipeline* followed by grid search.
 
 ### Pipeline 
 The pipeline module of sklearn allows you to chain transformers and estimators together in such a way that you can use them as a single unit. One thing to note that all estimators in a pipeline, except the last one, must be transformers (i.e. must have a transform method). The final estimator may be any type (transformer, classifier, etc.).
@@ -161,16 +161,16 @@ pipe = Pipeline(steps=[("feature_selection", SelectKBest()), ("pca", PCA()), \
 parameters = {"feature_selection__k": range(8, 10)}
 dt_pca = {"pca__n_components": range(4, 7), "PCA__whiten": [True, False]}
 dt_clf = {"decision_tree__min_samples_leaf": [2, 6, 10, 12],
-             "decision_tree__min_samples_split": [2, 6, 10, 12],
-             "decision_tree__criterion": ["entropy", "gini"],
-             "decision_tree__max_depth": [None, 5]}
+          "decision_tree__min_samples_split": [2, 6, 10, 12],
+          "decision_tree__criterion": ["entropy", "gini"],
+          "decision_tree__max_depth": [None, 5]}
 
 #update pca and classifier to the parameters dictionary
 parameters.update(dt_pca)  
 parameters.update(dt_clf)
 ```
 
-In the above code, there’s a particular convention you need to follow to name the parameters in the parameters dictionary. You need to have the name of the Pipeline step (e.g. decision_tree), followed by two underscores, followed by the name of the parameter (e.g., max_depth) that you want to vary.
+In the above code, we first apply feature selection, then principal component analysis and then, finally decision tree classifier. There’s a particular convention you need to follow to name the parameters in the parameters dictionary. You need to have the name of the Pipeline step (e.g. decision_tree), followed by two underscores, followed by the name of the parameter (e.g., max_depth) that you want to vary.
 
 ```python
 from sklearn.grid_search import GridSearchCV
@@ -184,4 +184,6 @@ for param_name in sorted(parameters.keys()):
     print '\t%s: %r' % (param_name, best_parameters[param_name])
 ```
 
-Once you have got the parameter grid set up correctly, then you apply *GridSearchCV* that multiplies out all the combinations of parameters and tries each one. Then you can ask for predictions from my GridSearchCV object, and it will automatically return to me the best set of predictions. Of course, trying tons of models can be time-consuming, but the outcome is a much better understanding of how my model performance depends on parameters.
+Once you have got the parameter grid set up correctly, then you apply GridSearchCV that multiplies out all the combinations of parameters and tries each one. Then you can ask for predictions from my GridSearchCV object, and it will automatically return to me the best set of predictions. Of course, trying tons of models can be time-consuming, but the outcome is a much better understanding of how my model performance depends on parameters.
+
+
