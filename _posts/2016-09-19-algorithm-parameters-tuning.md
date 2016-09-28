@@ -2,7 +2,7 @@
 layout:     post
 title:      Algorithm Parameters Tuning 
 date:       2016-09-19
-summary:    Machine learning, Parameters tuning, Features engineering, Evaluation metrices, Data visualization
+summary:    Machine learning, Features engineering, Dimensionality reduction, Parameters tuning, Sklearn, Python
 categories: blog
 ---
 In this post, I will detail cover how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and cross-validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
