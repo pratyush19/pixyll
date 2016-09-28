@@ -5,7 +5,7 @@ date:       2016-09-19
 summary:    Machine learning, Parameters tuning, Features engineering, Evaluation metrices, Data visualization
 categories: blog
 ---
-In this post, I will detail cover how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
+In this post, I will detail cover how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and cross-validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
 
 ## Feature Scaling
 Feature scaling is a major step in pre-processing the features for some types of machine learning algorithms. Some algorithms like Support Vector Machine, K-means calculate the distance between points, in that case, feature scaling becomes significantly important. If one of the features has a broad range of values, the distance will be dominated by this particular feature. Therefore, the range of all features should be normalized so that each feature contributes approximately proportionately to the final distance. 
@@ -30,7 +30,7 @@ scaler = MinMaxScaler()
 rescaled_features = scaler.fit_transform(features)
 ```
 
-## Features Selection
+## Feature Selection
 
 The minimal number of features a machine learning algorithm takes to capture the trends and patterns in the data. There are several go-to methods of automatically selecting features in sklearn. Many of them fall under the umbrella of univariate feature selection, which treats each feature independently and asks how much power it gives you in classifying or regressing.<br/>
 There are two big univariate feature selection tools in sklearn: *SelectPercentile* and *SelectKBest*. The difference is pretty apparent by the names: SelectPercentile selects the X% of features that are most powerful (where X is a parameter) and SelectKBest selects the K features that are most powerful (where K is a parameter).
@@ -117,19 +117,18 @@ Sklearn provides two different methods for parameters tuning, [GridSearchCV](htt
 
 #### GridSearchCV
 GridSearchCV is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. It exhaustively generates candidates from a grid of parameter values specified with the *param_grid* parameter. The beauty is that it can work through many combinations in only a couple extra lines of code.<br/>
-Let's do the parameters tuning for [decision tree](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier)
+Let's do the parameters tuning for [decision tree](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier).
 
 ```python
 from sklearn.grid_search import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
 
 #dictionary of the parameters, and the possible values they may take
-#you can more values and parameters (more computation time)
+#you can use more values and parameters (more computation time)
 parameters = {'max_depth':[None, 5, 10], 
               'min_samples_split':[2, 4, 6, 8, 10],
               'min_samples_leaf': [2, 4, 6, 8, 10],
-              'criterion': ["entropy", "gini"],
-              'random_state': [42, 46, 60]}
+              'criterion': ["entropy", "gini"]}
 #decision tree algorithm for classification
 dt = DecisionTreeClassifier()  
 #pass the algorithm and the dictionary of parameters to generate a grid of parameter combinations to try
@@ -140,4 +139,49 @@ clf.fit(features, labels)
 clf.best_params_.
 ```
 
+I should try all the combinations of parameters, and not just vary them independently. In the above code, I  tried 3 different values of *max_depth*,  5 different values of each *min_samples_split* and *min_samples_leaf*, and 2 different values of *criterion*, that means 3 x 5 x 5 x 2 = 150 different combinations. GridSearchCV allows me to construct a grid of all the combinations of parameters, tries each combination, and then reports back the best combination.
+ 
+ 
+Great, you have implemented parameters tuning for the decision tree with only a few extra lines of code. You can similarly tune parameters for any machine learning algorithm. But, there is one thing is that we have only used one estimator in the above code, i.e., the classifier in the parameters tuning. What if we want to use multiple estimators like *StandardScaler*, *SelectKBest*, *PCA* and grid search over parameters of all the estimators, the answer is *pipeline* followed by *grid search*.
 
+### Pipeline 
+The pipeline module of sklearn allows you to chain transformers and estimators together in such a way that you can use them as a single unit. One thing to note that all estimators in a pipeline, except the last one, must be transformers (i.e. must have a transform method). The final estimator may be any type (transformer, classifier, etc.).
+
+```python
+from sklearn.feature_selection import SelectKBest
+from sklearn.decomposition import PCA
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.pipeline import Pipeline
+
+#pipeline steps follow in the respective order:
+#SelectKBest -> PCA -> DecisionTreeClassifier
+pipe = Pipeline(steps=[("feature_selection", SelectKBest()), ("pca", PCA()), \
+                       ("decision_tree", DecisionTreeClassifier())])
+
+parameters = {"feature_selection__k": range(8, 10)}
+dt_pca = {"pca__n_components": range(4, 7), "PCA__whiten": [True, False]}
+dt_clf = {"decision_tree__min_samples_leaf": [2, 6, 10, 12],
+             "decision_tree__min_samples_split": [2, 6, 10, 12],
+             "decision_tree__criterion": ["entropy", "gini"],
+             "decision_tree__max_depth": [None, 5]}
+
+#update pca and classifier to the parameters dictionary
+parameters.update(dt_pca)  
+parameters.update(dt_clf)
+```
+
+In the above code, there’s a particular convention you need to follow to name the parameters in the parameters dictionary. You need to have the name of the Pipeline step (e.g. decision_tree), followed by two underscores, followed by the name of the parameter (e.g., max_depth) that you want to vary.
+
+```python
+from sklearn.grid_search import GridSearchCV
+
+grid_search = GridSearchCV(pipeline, param_grid=parameters)
+grid_search.fit(features_train, labels_train)
+prediction = grid_search.predict(features_test)
+
+best_parameters = grid_search.best_estimator_.get_params()
+for param_name in sorted(parameters.keys()):
+    print '\t%s: %r' % (param_name, best_parameters[param_name])
+```
+
+Once you have got the parameter grid set up correctly, then you apply *GridSearchCV* that multiplies out all the combinations of parameters and tries each one. Then you can ask for predictions from my GridSearchCV object, and it will automatically return to me the best set of predictions. Of course, trying tons of models can be time-consuming, but the outcome is a much better understanding of how my model performance depends on parameters.
