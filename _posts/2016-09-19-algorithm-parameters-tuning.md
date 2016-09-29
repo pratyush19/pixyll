@@ -5,7 +5,7 @@ date:       2016-09-19
 summary:    Machine learning, Features engineering, Dimensionality reduction, Parameters tuning, Sklearn, Python
 categories: blog
 ---
-In this post, I will detail cover how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and cross-validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
+In this post, I will cover in detail how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and cross-validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
 
 ## Feature Scaling
 Feature scaling is a major step in pre-processing the features for some types of machine learning algorithms. Some algorithms like Support Vector Machine, K-means calculate the distance between points, in that case, feature scaling becomes significantly important. If one of the features has a broad range of values, the distance will be dominated by this particular feature. Therefore, the range of all features should be normalized so that each feature contributes approximately proportionately to the final distance. 
