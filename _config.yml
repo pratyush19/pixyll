@@ -1,8 +1,8 @@
 # Site settings
 title:       Pratyush Kumar
 email:       pratyush.019@gmail.com
-author:      John Otander
-description: "Data Science blogs."
+author:      
+description: "A Data Science blog."
 baseurl:     ""
 url:         "https://pratyushkumar.me"
 date_format: "%b %-d, %Y"
