@@ -5,10 +5,10 @@ date:       2016-09-19
 summary:    Machine learning, Features engineering, Dimensionality reduction, Parameters tuning, Sklearn, Python
 categories: blog
 ---
-In this post, I will cover in detail how to perform parameters tuning of an algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and cross-validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library.
+In this post, I will cover in detail how to perform parameters tuning of any machine learning algorithm. Parameters tuning is a process of optimizing algorithm parameters to give the best result on an unseen data set. Before jumping into the parameters tuning, I will first give you the overview of feature scaling, feature selection, dimensionality reduction and cross-validation. These all needs to be performed to apply parameters tuning more efficiently.  I will use Python [scikit-learn](http://scikit-learn.org/stable/) library to demonstrate the algorithm code.
 
 ## Feature Scaling
-Feature scaling is a major step in pre-processing the features for some types of machine learning algorithms. Some algorithms like Support Vector Machine, K-means calculate the distance between points, in that case, feature scaling becomes significantly important. If one of the features has a broad range of values, the distance will be dominated by this particular feature. Therefore, the range of all features should be normalized so that each feature contributes approximately proportionately to the final distance. 
+Feature scaling is a major step in pre-processing the features for some types of machine learning algorithms. Some algorithms like Support Vector Machine, K-means calculate the distance between points, in that case, feature scaling becomes significantly important. If one of the features has a broad range of values, the distance will be dominated by this particular feature. Therefore, the range of all features should be normalized so that each feature contributes approximately proportionately to the final features. 
 
 #### Standardization
 Feature standardization or, Z-score normalization rescaled the values of each feature to behave like standard normal distribution with mean equal to 0 and standard deviation equal to 1. The Z-score normalization is calculated by [standard scores](https://en.wikipedia.org/wiki/Standard_score) using equation: z = (X-mean)/s.d.. It transforms the data to center it by removing the mean value of each feature, then scale it by dividing by their standard deviation. Below is its implementation in scikit-learn.
@@ -185,5 +185,7 @@ for param_name in sorted(parameters.keys()):
 ```
 
 Once you have got the parameter grid set up correctly, then you apply GridSearchCV that multiplies out all the combinations of parameters and tries each one. Then you can ask for predictions from my GridSearchCV object, and it will automatically return to me the best set of predictions. Of course, trying tons of models can be time-consuming, but the outcome is a much better understanding of how my model performance depends on parameters.
+
+
 
 
