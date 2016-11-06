@@ -5,7 +5,7 @@ permalink: /about/
 tags: about
 ---
 <p align="center">
-<img src="/images/me.JPG" width="200" height = "200" />
+<img src="/images/me_1.png" width="200" height = "200" />
 </p>
 <br />
 Hi! I'm Pratyush, a final year undergraduate student at Indian Institute of Technology Roorkee, India. 
