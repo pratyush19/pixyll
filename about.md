@@ -17,6 +17,6 @@ I'm interested in solving complex problems involving machine learning, big data,
 I'm a lifelong learner believes everyday there are lots of new things we can learn to be, even a bit, better than the person we were yesterday.
 <br />
 <br />
-<!--
-You can find my Résumé [here](/Resume.pdf).
--->
+
+You can see my Résumé [here](/Resume.pdf).
+
