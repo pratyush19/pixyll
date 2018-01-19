@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Introduction to Pytorch
+title:      Introduction to PyTorch
 date:       2018-01-20
 summary:    Deep Learning Framework, Neural Network
 categories: blog
