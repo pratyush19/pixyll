@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Incremental Learning in Medical Imaging
-date:       2018-01-20
+date:       2018-08-19
 summary:    Incremental Learning, Lifelong Learning, Hard Example Mining, Convolutional Neural Network
 categories: blog
 ---
